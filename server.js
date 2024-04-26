@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 // Connect to MongoDB using the connection string from .env file
 mongoose.connect(process.env.MONGODB_URI);
@@ -53,17 +53,32 @@ app.post("/fruits", async (req, res) => {
     res.redirect("/fruits");
 });
 
-// Route for retrieving all fruits and rendering the fruits index page
-app.get("/fruits", async (req, res) => {
-    const allFruits = await Fruit.find();
-    res.render("fruits/index.ejs", { fruits: allFruits });
-});
-
 // Route for retrieving a specific fruit by ID and rendering its details page
 app.get("/fruits/:fruitId", async (req, res) => {
     const foundFruit = await Fruit.findById(req.params.fruitId);
     res.render("fruits/show.ejs", { fruit: foundFruit });
 });
+
+// Route for retrieving all fruits and rendering the fruits index page and filtering by ready/not ready to eat
+app.get("/fruits", async (req, res) => {
+    const showReadyToEat = req.query.ready === 'true';
+    const showNotReadyToEat = req.query.notReady === 'true';
+    let filter = {};
+  
+    if (showReadyToEat) {
+      filter = { isReadyToEat: true };
+    } else if (showNotReadyToEat) {
+      filter = { isReadyToEat: false };
+    }
+  
+    try {
+      const fruits = await Fruit.find(filter);
+      res.render("fruits/index.ejs", { fruits, showReadyToEat, showNotReadyToEat });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 
 // Route for deleting a specific fruit by ID
 app.delete("/fruits/:fruitId", async (req, res) => {

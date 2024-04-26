@@ -16,18 +16,20 @@
         <div class="index-header-div">
             <h1>All Fruits</h1>
             <nav>
-                <a
-                    class="add-fruit"
-                    href="/"
-                    >Home</a
-                >
-                <a
-                    class="add-fruit"
-                    href="/fruits/new"
-                    >Add fruit</a
-                >
+              <a class="add-fruit" href="/">Home</a>
+              <a class="add-fruit" href="/fruits/new">Add fruit</a>
+              <% if (showReadyToEat) { %>
+                <a class="add-fruit" href="/fruits">Show All</a>
+                <a class="add-fruit" href="/fruits?notReady=true">Not Ripe</a>
+              <% } else if (showNotReadyToEat) { %>
+                <a class="add-fruit" href="/fruits">Show All</a>
+                <a class="add-fruit" href="/fruits?ready=true">Ripe</a>
+              <% } else { %>
+                <a class="add-fruit" href="/fruits?ready=true">Ripe</a>
+                <a class="add-fruit" href="/fruits?notReady=true">Not Ripe</a>
+              <% } %>
             </nav>
-        </div>
+          </div>
         <ul>
             <% fruits.forEach((fruit)=> { %>
             <li>

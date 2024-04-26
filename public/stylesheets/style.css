@@ -251,26 +251,32 @@ button:active {
 
 .delete-button {
     background-color: #f47b5b;
+    box-shadow: 0 5px #ffbd59;
 }
 
 .edit-button {
     background-color: #f47b5b;
+    box-shadow: 0 5px #ffbd59;
 }
 
 .delete-button:hover {
     background-color: #ffbd59;
+    box-shadow: 0 5px #f47b5b;
 }
 
 .delete-button:active {
-    background-color: rgb(217, 108, 78);
+    background-color: #f47b5b;
+    box-shadow: 0 5px #ffbd59;
 }
 
 .edit-button:hover {
     background-color: #ffbd59;
+    box-shadow: 0 5px #f47b5b;
 }
 
 .edit-button:active {
-    background-color: rgb(217, 108, 78);
+    background-color: #f47b5b;
+    box-shadow: 0 5px #ffbd59;
 }
 
 /* Miscellaneous Styles */
