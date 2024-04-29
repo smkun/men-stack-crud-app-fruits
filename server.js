@@ -61,24 +61,28 @@ app.get("/fruits/:fruitId", async (req, res) => {
 
 // Route for retrieving all fruits and rendering the fruits index page and filtering by ready/not ready to eat
 app.get("/fruits", async (req, res) => {
-    const showReadyToEat = req.query.ready === 'true';
-    const showNotReadyToEat = req.query.notReady === 'true';
+    const showReadyToEat = req.query.ready === "true";
+    const showNotReadyToEat = req.query.notReady === "true";
     let filter = {};
-  
+
     if (showReadyToEat) {
-      filter = { isReadyToEat: true };
+        filter = { isReadyToEat: true };
     } else if (showNotReadyToEat) {
-      filter = { isReadyToEat: false };
+        filter = { isReadyToEat: false };
     }
-  
+
     try {
-      const fruits = await Fruit.find(filter);
-      res.render("fruits/index.ejs", { fruits, showReadyToEat, showNotReadyToEat });
+        const fruits = await Fruit.find(filter);
+        res.render("fruits/index.ejs", {
+            fruits,
+            showReadyToEat,
+            showNotReadyToEat,
+        });
     } catch (err) {
-      console.log(err);
-      res.status(500).send("Internal Server Error");
+        console.log(err);
+        res.status(500).send("Internal Server Error");
     }
-  });
+});
 
 // Route for deleting a specific fruit by ID
 app.delete("/fruits/:fruitId", async (req, res) => {
