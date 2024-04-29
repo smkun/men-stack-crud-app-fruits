@@ -19,17 +19,27 @@
             <p>This fruit is not ready to eat!</p>
             <% } %>
             <div class="fruit-actions">
-                <form class="delete-form" action="/fruits/<%=fruit._id%>?_method=DELETE" method="POST">
-                  <button class="delete-button" type="submit">
-                    Delete <%= fruit.name %>
-                  </button>
+                <form
+                    class="delete-form"
+                    action="/fruits/<%=fruit._id%>?_method=DELETE"
+                    method="POST">
+                    <button
+                        class="delete-button"
+                        type="submit">
+                        Delete <%= fruit.name %>
+                    </button>
                 </form>
-                <form class="edit-form" action="/fruits/<%= fruit._id %>/edit" method="GET">
-                  <button class="edit-button" type="submit">
-                    Edit <%= fruit.name %>
-                  </button>
+                <form
+                    class="edit-form"
+                    action="/fruits/<%= fruit._id %>/edit"
+                    method="GET">
+                    <button
+                        class="edit-button"
+                        type="submit">
+                        Edit <%= fruit.name %>
+                    </button>
                 </form>
-              </div>
+            </div>
             <a href="/fruits">
                 <div class="index-link-text">Back to Fruits</div>
             </a>
